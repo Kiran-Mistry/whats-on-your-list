@@ -1,4 +1,4 @@
-// useState is a react hook to manage states
+// useState is a react hook to manage states in a function component
 import React, { useState } from "react";
 import {
   StyleSheet,
@@ -15,11 +15,11 @@ import GoalInput from "./components/GoalInput";
 
 export default function App() {
   /*
-  uses array destructing to return a value and a function to update the value
-  string passed in the useState is the default value
-  for example, shen the setEnteredGoal function is called it will add that value to enteredGoal
+  Uses array destructing to return a value and a function to update the value.
+  The param passed in the useState is the default value
+  for example, when the setEnteredGoal function is called it will add that value to enteredGoal
   */
-  const [courseGoals, setCourseGoals] = useState([]);
+  const [listItem, setListItem] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
 
   /*
@@ -27,10 +27,10 @@ export default function App() {
   current content of that state (whatever is in the array) and also
   the new goal we have just entered
   */
-  const addGoalHandler = (goalTitle) => {
-    setCourseGoals((currentGoals) => [
-      ...currentGoals,
-      { id: Math.random().toString(), value: goalTitle }, // this creates a unique key for each list item in the flatlist. we access the value when we render the item.
+  const addListItemHandler = (listItemTitle) => {
+    setListItem((currentListItems) => [
+      ...currentListItems,
+      { id: Math.random().toString(), value: listItemTitle }, // this creates a unique key for each list item in the flatlist. we access the value when we render the item.
     ]);
     setIsAddMode(false);
   };
@@ -40,13 +40,13 @@ export default function App() {
   method to create a new array if each goals id does not match the goalID (the one 
     we want to remove)
   */
-  const removeGoalHandler = (goalId) => {
-    setCourseGoals((currentGoals) => {
-      return currentGoals.filter((goal) => goal.id !== goalId);
+  const removeListItemHandler = (listItemId) => {
+    setListItem((currentListItems) => {
+      return currentListItems.filter((item) => item.id !== listItemId);
     });
   };
 
-  const cancelGoalAddtionHandler = () => {
+  const cancelItemAddtionHandler = () => {
     setIsAddMode(false);
   };
 
@@ -57,14 +57,7 @@ export default function App() {
   const styles = StyleSheet.create({
     screen: {
       flex: 1,
-      //paddingTop: 50,
-      //paddingLeft: 5,
-     // paddingRight: 5,
-      backgroundColor: 'white',
-      // borderColor: 'white',
-      // borderWidth: 3,
-      
-      //padding: 30,
+      backgroundColor: "white",
     },
     slider: {
       height: 0.45 * height,
@@ -77,41 +70,47 @@ export default function App() {
       flex: 1,
       paddingTop: 150,
       paddingLeft: 55,
-      color: "#3333ff",
+      color: "black",
       fontSize: 40,
-      fontWeight: "bold",
-
+      fontFamily: "sans-serif-thin",
     },
     footer: {
       flex: 1,
-    }
+    },
   });
 
   return (
     <View style={styles.screen}>
       <View style={styles.slider}>
-        <ScrollView horizontal snapToInterval={width} decelerationRate="fast" showsHorizontalScrollIndicator={false} bounces={false}>
+        <ScrollView
+          horizontal
+          snapToInterval={width}
+          decelerationRate="fast"
+          showsHorizontalScrollIndicator={false}
+          bounces={false}
+        >
           <View style={{ width }}>
-            <Text style={styles.title}>
-              {mainPageTitle}
-            </Text>
+            <Text style={styles.title}>{mainPageTitle}</Text>
           </View>
           <View style={{ width }}>
-            <View style={{paddingTop:40}}>
-              <Button title="Add New List Item" onPress={() => setIsAddMode(true)}/>
+            <View style={{ paddingTop: 40 }}>
+              <Button
+                title="Add New List Item"
+                onPress={() => setIsAddMode(true)}
+              />
             </View>
             <GoalInput
               visible={isAddMode}
-              onAddGoal={addGoalHandler}
-              onCancel={cancelGoalAddtionHandler}
+              onAddGoal={addListItemHandler}
+              onCancel={cancelItemAddtionHandler}
             />
             <FlatList //used instead of scroll view when you don't know how long a list will be. better for performance
               keyExtractor={(item, index) => item.id}
-              data={courseGoals}
+              data={listItem}
               renderItem={(itemData) => (
                 <GoalItem
                   id={itemData.item.id}
-                  onDelete={removeGoalHandler}
+                  onDelete={removeListItemHandler}
                   title={itemData.item.value}
                 />
               )}
@@ -120,11 +119,20 @@ export default function App() {
         </ScrollView>
       </View>
       <View style={styles.footer}>
-        <View style={{...StyleSheet.absoluteFillObject, backgroundColor: '#F5F5F5'}}/>
-        <View style={{flex: 1, backgroundColor: 'white', borderTopLeftRadius: 125}}/>
+        <View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            backgroundColor: "#F5F5F5",
+          }}
+        />
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "white",
+            borderTopLeftRadius: 125,
+          }}
+        />
       </View>
     </View>
   );
-}
-
-
+};
