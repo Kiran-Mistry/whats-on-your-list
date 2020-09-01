@@ -51,33 +51,39 @@ export default function App() {
   };
 
   const mainPageTitle = "What's On Your List?";
+  const topItems = "Your Top 3 list items:";
   const { width, height } = Dimensions.get("window");
 
   const styles = StyleSheet.create({
     screen: {
       flex: 1,
-      paddingTop: 50,
-      paddingLeft: 25,
-      paddingRight: 25,
-      backgroundColor: '#f2f2f2',
-      borderColor: '#e6e6e6',
-      borderWidth: 6,
-      borderTopRightRadius: 25,
-      borderTopLeftRadius: 25,
-  
+      //paddingTop: 50,
+      //paddingLeft: 5,
+     // paddingRight: 5,
+      backgroundColor: 'white',
+      // borderColor: 'white',
+      // borderWidth: 3,
+      
       //padding: 30,
     },
     slider: {
-     height: 0.8 * height,
+      height: 0.45 * height,
+      backgroundColor: "#F8F8F8",
+      borderTopRightRadius: 25,
+      borderTopLeftRadius: 25,
+      borderBottomRightRadius: 125,
     },
     title: {
       flex: 1,
       paddingTop: 150,
-      paddingLeft: 25,
+      paddingLeft: 55,
       color: "#3333ff",
-      fontSize: 30,
+      fontSize: 40,
       fontWeight: "bold",
 
+    },
+    footer: {
+      flex: 1,
     }
   });
 
@@ -91,7 +97,9 @@ export default function App() {
             </Text>
           </View>
           <View style={{ width }}>
-            <Button title="Add New List Item" onPress={() => setIsAddMode(true)}/>
+            <View style={{paddingTop:40}}>
+              <Button title="Add New List Item" onPress={() => setIsAddMode(true)}/>
+            </View>
             <GoalInput
               visible={isAddMode}
               onAddGoal={addGoalHandler}
@@ -110,6 +118,10 @@ export default function App() {
             />
           </View>
         </ScrollView>
+      </View>
+      <View style={styles.footer}>
+        <View style={{...StyleSheet.absoluteFillObject, backgroundColor: '#F5F5F5'}}/>
+        <View style={{flex: 1, backgroundColor: 'white', borderTopLeftRadius: 125}}/>
       </View>
     </View>
   );
