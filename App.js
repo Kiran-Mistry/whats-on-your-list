@@ -97,6 +97,7 @@ export default function App() {
               <Button
                 title="Add New List Item"
                 onPress={() => setIsAddMode(true)}
+                color = '#66a5e3'
               />
             </View>
             <GoalInput
@@ -118,21 +119,21 @@ export default function App() {
           </View>
         </ScrollView>
       </View>
-      <View style={styles.footer}>
-        <View
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            backgroundColor: "#F5F5F5",
-          }}
-        />
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "white",
-            borderTopLeftRadius: 125,
-          }}
-        />
-      </View>
+          <View style={styles.footer}>
+            <View
+              style={{
+                ...StyleSheet.absoluteFillObject,
+                backgroundColor: "#F5F5F5",
+              }}
+            />
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                borderTopLeftRadius: 125,
+              }}
+            />
+          </View>
     </View>
   );
 };
