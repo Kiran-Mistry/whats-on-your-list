@@ -60,7 +60,7 @@ export default function App() {
       backgroundColor: "white",
     },
     slider: {
-      height: 0.45 * height,
+      height: 0.75 * height,
       backgroundColor: "#F8F8F8",
       borderTopRightRadius: 25,
       borderTopLeftRadius: 25,
@@ -105,7 +105,7 @@ export default function App() {
               onAddGoal={addListItemHandler}
               onCancel={cancelItemAddtionHandler}
             />
-            <FlatList //used instead of scroll view when you don't know how long a list will be. better for performance
+            <FlatList style={{paddingLeft: 10}}//used instead of scroll view when you don't know how long a list will be. better for performance
               keyExtractor={(item, index) => item.id}
               data={listItem}
               renderItem={(itemData) => (
@@ -126,6 +126,7 @@ export default function App() {
                 backgroundColor: "#F5F5F5",
               }}
             />
+
             <View
               style={{
                 flex: 1,
