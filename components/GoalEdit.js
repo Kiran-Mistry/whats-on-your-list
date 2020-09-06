@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal, Text } from "react-native";
 
-const GoalInput = (props) => {
+const GoalEdit = (props) => {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [updatedGoal, setUpdatedGoal] = useState(enteredGoal)
 
@@ -22,19 +22,27 @@ const GoalInput = (props) => {
 
   return (
     <Modal visible={props.visible} animationType="slide">
+        <View style={styles.editHeading}>
+            <Text>
+                EDIT
+            </Text>
+        </View>
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Enter item"
+          placeholder="Edit item"
           style={styles.textContainer}
           onChangeText={goalInputHandler}
           value={enteredGoal}
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="CANCEL" color="#d4470f" onPress={props.onCancel} />
+            <Button title="Cancel" color="#d4470f" onPress={props.onCancel} />
           </View>
           <View style={styles.button}>
-            <Button title="ADD" color='#07a629' onPress={addGoalHandler} />
+            <Button title="Add" color='#07a629' onPress={addGoalHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Star" color='#dbc60d' onPress={addGoalHandler} />
           </View>
         </View>
       </View>
@@ -47,22 +55,33 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 10,
+    margin: 10
   },
   textContainer: {
     borderColor: "black",
     borderWidth: 1,
     padding: 10,
-    width: 235,
+    width: 350,
     marginBottom: 10,
   },
   buttonContainer: {
+    flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: 180,
   },
   button: {
-    width: 70,
+    width: 80,
+    margin: 10    
+  },
+  editHeading: {
+      flexDirection: 'row',
+      backgroundColor: '#babab6',
+      paddingTop: 20,
+      paddingBottom: 20, 
+      marginTop: 0,
+      justifyContent: "center",
+      fontSize: 10,
   }
 });
 
-export default GoalInput;
+export default GoalEdit;
